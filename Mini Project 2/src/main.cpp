@@ -25,15 +25,13 @@ void loop() {
         myservoX.write(posX);                 // tell servo to go to position in variable 'posX'
         delay(150);                            // waits 15ms for the servo to reach the position
         sensorValue = analogRead(analogInPin);
-        Serial.print(posX); Serial.print(", ");
-        Serial.println(sensorValue);
         
         for (posY = 0; posY <= 180; posY += 5) {  // goes from 0 degrees to 180 degrees Y axis
             myservoY.write(posY);                 // tell servo to go to position in variable 'posY'
             delay(150);                            // waits 15ms for the servo to reach the position
             
             sensorValue = analogRead(analogInPin);
-            Serial.print(posY); Serial.print(", ");
+            Serial.print(posX); Serial.print(", "); Serial.print(posY); Serial.print(", ");
             Serial.println(sensorValue);
         }
         myservoY.write(0);
