@@ -1,77 +1,43 @@
-#      ******************************************************************
-#      *                                                                *
-#      *                                                                *
-#      *    Example Python program that receives data from an Arduino   *
-#      *                                                                *
-#      *                                                                *
-#      ******************************************************************
-
-
 import serial
 
-#
-# Note 1: This python script was designed to run with Python 3.
-#
-# Note 2: The script uses "pyserial" which must be installed.  If you have
-#         previously installed the "serial" package, it must be uninstalled
-#         first.
-#
-# Note 3: While this script is running you can not re-program the Arduino.
-#         Before downloading a new Arduino sketch, you must exit this
-#         script first.
-#
+#name of serial port
+arduinoComPort = "COM4"
 
-
-#
-# Set the name of the serial port.  Determine the name as follows:
-#	1) From Arduino's "Tools" menu, select "Port"
-#	2) It will show you which Port is used to connect to the Arduino
-#
-# For Windows computers, the name is formatted like: "COM6"
-# For Apple computers, the name is formatted like: "/dev/tty.usbmodemfa141"
-#
-arduinoComPort = "COM6"
-
-
-#
-# Set the baud rate
-# NOTE1: The baudRate for the sending and receiving programs must be the same!
-# NOTE2: For faster communication, set the baudRate to 115200 below
-#        and check that the arduino sketch you are using is updated as well.
-#
+#baudrate
 baudRate = 9600
 
+# set up the serial line
+ser = serial.Serial('COM4', 9600)
+time.sleep(2)
 
-#
-# open the serial port
-#
-serialPort = serial.Serial(arduinoComPort, baudRate, timeout=1)
+#Send Arduino a Signal
+
+
+# Read and record the data
+data =[]                       # empty list to store the data
+for i in range(100):
+  line = serialPort.readline().decode()  # convert the byte string to a unicode string
+  if len(line) > 0:
+    a, b, c = (int(x) for x in line.split(','))  #converts the strings into integer
+    print(a,b,c)
+    data.append(a,b,c)     # add int to data lists
+
+ser.close()
+
+import matplotlib.pyplot as plt
+
+plt.plot(data)
+plt.xlabel('Angles')
+plt.ylabel('Servo Reading')
+plt.title('Servo Reading vs. Angle')
+plt.show()
 
 
 
-#
-# main loop to read data from the Arduino, then display it
-#
-while True:
-  #
-  # ask for a line of data from the serial port, the ".decode()" converts the
-  # data from an "array of bytes", to a string
-  #
-  lineOfData = serialPort.readline().decode()
 
-  #
-  # check if data was received
-  #
-  if len(lineOfData) > 0:
-    #
-    # data was received, convert it into 4 integers
-    #
-    a, b, c, d = (int(x) for x in lineOfData.split(','))
 
-    #
-    # print the results
-    #
-    print("a = " + str(a), end="")
-    print(", b = " + str(b), end="")
-    print(", c = " + str(c), end="")
-    print(", d = " + str(d))
+
+
+
+
+
