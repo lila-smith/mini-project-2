@@ -53,7 +53,7 @@ Servo myservoY;  // create servo object to control a servo's Y rotation
 const int analogInPin = A0;  // Analog input pin that the potentiometer is attached to
 const int servoYPin = 10; // Sets pin num for tilt servo
 
-const int posLimitsY[] = {0, 50, 10}; // tilt servo: starting angle, ending angle, angle increment
+const int posLimitsY[] = {15, 165, 10}; // tilt servo: starting angle, ending angle, angle increment
 
 
 int posY = 0;    // variable to store the servo position along Y axis
@@ -69,11 +69,10 @@ void setup() {
 void loop() {
     delay(3000);
     Serial.println("Begin");
-    delay(2000);
     for (posY = posLimitsY[0]; posY <= posLimitsY[1]; posY += posLimitsY[2]) {  // goes from 0 degrees to 180 degrees Y axis
         myservoY.write(posY);                 // tell servo to go to position in variable 'posY'
         delay(150);                            // waits 15ms for the servo to reach the position
-        sensorValue = analogRead(analogInPin); 
+        sensorValue = analogRead(analogInPin);
         outputValue = map(sensorValue, 0, 1023, 0, 255);
         Serial.println((String) 0 + ", " + posY + ", " + outputValue); // prints data to be recorded with python script
     }
