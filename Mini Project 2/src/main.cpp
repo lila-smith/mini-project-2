@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Servo.h>
 
-/* 
+
 Servo myservoX;  // create servo object to control a servo's X rotation
 Servo myservoY;  // create servo object to control a servo's Y rotation
 
@@ -9,8 +9,8 @@ const int analogInPin = A0;  // Analog input pin that the potentiometer is attac
 const int servoXPin = 9; // Sets pin num for pan servo
 const int servoYPin = 10; // Sets pin num for tilt servo
 
-const int posLimitsX[] = {0, 50, 10}; // pan servo: starting angle, ending angle, angle increment
-const int posLimitsY[] = {0, 50, 10}; // tilt servo: starting angle, ending angle, angle increment
+const int posLimitsX[] = {0, 45, 5}; // pan servo: starting angle, ending angle, angle increment
+const int posLimitsY[] = {30, 120, 5}; // tilt servo: starting angle, ending angle, angle increment
 
 
 int posX = 0;    // variable to store the servo position along X axis
@@ -36,7 +36,7 @@ void loop() {
         
         for (posY = posLimitsY[0]; posY <= posLimitsY[1]; posY += posLimitsY[2]) {  // goes from 0 degrees to 180 degrees Y axis
             myservoY.write(posY);                 // tell servo to go to position in variable 'posY'
-            delay(150);                            // waits 15ms for the servo to reach the position
+            delay(75);                            // waits 15ms for the servo to reach the position
 
             sensorValue = analogRead(analogInPin); 
             outputValue = map(sensorValue, 0, 1023, 0, 255);
@@ -45,8 +45,8 @@ void loop() {
     }
     Serial.println("End");
 }
- */
 
+/* 
 // One servo version
 Servo myservoY;  // create servo object to control a servo's Y rotation
 
@@ -77,4 +77,4 @@ void loop() {
         Serial.println((String) 0 + ", " + posY + ", " + outputValue); // prints data to be recorded with python script
     }
     Serial.println("End");
-}
+} */
