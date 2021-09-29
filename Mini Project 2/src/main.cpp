@@ -31,8 +31,6 @@ void loop() {
     delay(2000);
     for (posX = posLimitsX[0]; posX <= posLimitsX[1]; posX += posLimitsX[2]) {  // goes from 0 degrees to 180 degrees X axis
         myservoX.write(posX);                 // tell servo to go to position in variable 'posX'
-        delay(150);                           // waits 15ms for the servo to reach the position
-        sensorValue = analogRead(analogInPin); // CAN WE REMOVE THIS???
         
         for (posY = posLimitsY[0]; posY <= posLimitsY[1]; posY += posLimitsY[2]) {  // goes from 0 degrees to 180 degrees Y axis
             myservoY.write(posY);                 // tell servo to go to position in variable 'posY'

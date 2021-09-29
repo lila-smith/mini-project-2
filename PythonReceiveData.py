@@ -6,8 +6,8 @@ def output2cart(input):
   a = 1736 
   b = -0.8824
   distance = (output/a)**(1/b)
-  x = distance * np.cos(np.radians(pan)) * np.sin(np.radians(tilt))
-  y = distance * np.cos(np.radians(pan)) * np.sin(np.radians(tilt))
+  x = distance * np.sin(np.radians(pan)) * np.cos(np.radians(tilt))
+  y = distance * np.sin(np.radians(pan)) * np.sin(np.radians(tilt))
   z = distance * np.cos(np.radians(tilt))
   return x,y,z
 
