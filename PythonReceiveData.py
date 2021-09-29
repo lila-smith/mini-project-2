@@ -23,18 +23,18 @@ time.sleep(2)
 
 # Read and record the data
 data = np.array([[0,0,0]])                    # empty list to store the data
+line = ""
 
 while not serialPort.readline().decode().strip() == "Begin":
   print("waiting to begin")
 
-while not serialPort.readline().decode().strip() == "End":
-  line = serialPort.readline().decode() # convert the byte string to a unicode string
-  while len(line.split(",")) < 3:
-    line = serialPort.readline().decode() # convert the byte string to a unicode string
-  print(line)
-  pan_angle, tilt_angle, sensor_output = (int(x) for x in line.strip().split(","))  #converts the strings into integer
-  print(pan_angle,tilt_angle,sensor_output)
-  data = np.append(data, [[pan_angle,tilt_angle,sensor_output]], axis=0)
+while not line == "End":
+  if len(line.split(",")) > 2:
+    pan_angle, tilt_angle, sensor_output = (int(x) for x in line.strip().split(","))  #converts the strings into integer
+    print(pan_angle,tilt_angle,sensor_output)
+    data = np.append(data, [[pan_angle,tilt_angle,sensor_output]], axis=0)
+  line = serialPort.readline().decode().strip() # convert the byte string to a unicode string
+
 
 print("end")
 serialPort.close()
