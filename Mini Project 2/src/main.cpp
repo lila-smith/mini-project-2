@@ -32,13 +32,14 @@ void loop() {
     for (posX = posLimitsX[0]; posX <= posLimitsX[1]; posX += posLimitsX[2]) {  // goes from 0 degrees to 180 degrees X axis
         myservoX.write(posX);                 // tell servo to go to position in variable 'posX'
         delay(150);                           // waits 15ms for the servo to reach the position
-        sensorValue = analogRead(analogInPin); // CAN WE REMOVE THIS???
         
         for (posY = posLimitsY[0]; posY <= posLimitsY[1]; posY += posLimitsY[2]) {  // goes from 0 degrees to 180 degrees Y axis
             myservoY.write(posY);                 // tell servo to go to position in variable 'posY'
             delay(75);                            // waits 15ms for the servo to reach the position
-
-            sensorValue = analogRead(analogInPin); 
+            sensorValue = analogRead(analogInPin); // CAN WE REMOVE THIS???
+            for (int i = 0; i < 5; i++) {
+                sensorValue = min(sensorValue, analogRead(analogInPin)); 
+            }
             outputValue = map(sensorValue, 0, 1023, 0, 255);
             Serial.println((String) posX + ", " + posY + ", " + outputValue); // prints data to be recorded with python script
         }
