@@ -20,7 +20,7 @@ def output2cart(input):
 
 
 #name of serial port
-arduinoComPort = "/dev/ttyACM0"
+arduinoComPort = "/dev/ttyACM0" # Change this if on Windows
 
 #baudrate
 baudRate = 9600
