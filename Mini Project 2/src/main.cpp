@@ -52,15 +52,15 @@ void loop() {
 Servo myservoY;  // create servo object to control a servo's Y rotation
 
 const int analogInPin = A0;  // Analog input pin that the potentiometer is attached to
-const int servoYPin = 10; // Sets pin num for tilt servo
+const int servoYPin = 10;    // Sets pin num for tilt servo
 
 const int posLimitsY[] = {15, 165, 10}; // tilt servo: starting angle, ending angle, angle increment
 
 
-int posY = 0;    // variable to store the servo position along Y axis
+int posY = 0;                // variable to store the servo position along Y axis
 
-int sensorValue = 0;    // value read from the pot
-int outputValue = 0;    // value mapped to 256
+int sensorValue = 0;         // value read from the pot
+int outputValue = 0;         // value mapped to 256
 
 void setup() {
   myservoY.attach(servoYPin); 
