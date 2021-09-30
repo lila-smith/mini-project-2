@@ -7,9 +7,9 @@ def output2cart(input):
   a = 1736 
   b = -0.8824
   distance = (output/a)**(1/b)
-  x = distance * np.sin(np.radians(pan)) * np.cos(np.radians(tilt))
-  y = distance * np.sin(np.radians(pan)) * np.sin(np.radians(tilt))
-  z = distance * np.cos(np.radians(tilt))
+  x = distance * np.sin(np.radians(pan)) * np.cos(np.radians(90-tilt))
+  y = distance * np.sin(np.radians(pan)) * np.sin(np.radians(90-tilt))
+  z = distance * np.cos(np.radians(90-tilt))
   return x,y,z
 
 def plot(input):
@@ -21,6 +21,10 @@ def plot(input):
   ax.scatter3D(input[0], input[1], input[2], color = "green")
   plt.title("simple 3D scatter plot")
   
+  ax.set_xlabel('X axis')
+  ax.set_ylabel('Y axis')
+  ax.set_zlabel('Z axis')
+
   # show plot
   plt.show()
 
